@@ -236,14 +236,46 @@ console.log(thirdPerson.name); //Max
 
 ### 2.8 Array functions
 
-Although each one has their own goal, all those methods applied to an array take a function and execute on each element in an array. **map** maps the resulting elements into a new array. There are more (sort, filter, etc).
+Although each one has their own goal, all those methods applied to an array take a function and execute on each element in an array. The [main documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) contains more info about each property. The main ones are:
+
+- **map** creates a new array with the results of the function
+
+- **filter** creates a new array with the element that pass the function
+
+- **find** returns first element satisfying condition
+
+- **findIndex** returns index of the first element satisfying condition
+
+- **reduce** returns function applied to each element with the the calculation of previous element (e.g. summing all of them)
+
+- **concat** creates a new array merging two or more arrays
+
+- **slice** creates a new array with the portion of another array without modifying the original one
+
+- **splice** changes an array adding, replacing or removing specific elements in specific indexes. It modifies the original array!
+
+There are more (sort, filter, etc).
 
 ```js
-const numbers = [1, 2, 3];
+const numbers = [1, 2, 4, 6, 5];
+const letters = ['a', 'b', 'c'];
 
-const doubleNumArray = numbers.map((num) => {
-  return num * 2;
-});
-console.log(numbers); // [1, 2, 3]
-console.log(doubleNumArray); // [2, 4, 6]
+const mapArray = numbers.map(num => num * 2);
+const filterArray = numbers.filter(num => num < 6);
+const findElem = numbers.find(num => num > 3);
+const findIndexElem = numbers.findIndex(num => num > 3);
+const reduceElem = numbers.reduce((num1, num2) => num1 * num2);
+const concatArray = numbers.concat(letters);
+const sliceArray = numbers.slice(2);
+
+console.log(numbers); // [1, 2, 4, 6, 5]
+console.log(mapArray); // [2, 4, 8, 12, 10]
+console.log(filterArray); // [1, 2, 4, 5]
+console.log(findElem); // 4 
+console.log(findIndexElem); // 2
+console.log(reduceElem); // 240
+console.log(concatArray); // [1, 2, 4, 6, 5, 'a', 'b', 'c']
+console.log(sliceArray); // [4, 6, 5]
+numbers.splice(3, 1, 3); // adding at the end since it modifies the original array
+console.log(numbers); // [1, 2, 3, 6, 5]
 ```
