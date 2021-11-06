@@ -71,3 +71,38 @@ function ExpenseItem(props) {
 ```
 
 You can nest and pass props further level downwards.
+
+### 3.4 Composition
+
+Composition is about building components inside other components
+
+We can also pass elements not through props but within the tags. For example if we share specific styles within components.
+
+In order to build custom HTML components with elements within the tab we should output **{props.children}** within the Component definition. In the wrapper component we should import the styles from the "parent" component by appending to the classNames the ones in the parent via **props.className**
+
+### 3.5 Advanced syntax
+
+Old React applications needed to import React in all JSX files. So instead of making ```return (<div>...</div>)``` we had to do ```return React.createElement('div', {attributes for div}, React.createElement(element inside div), ... attrs and further nested elements)```. So, for example,
+
+```js
+return (
+  <div>
+    <h2>Let's get started!</h2>
+    <Expenses items={expenses} />
+  </div>
+);
+
+  //is equals to
+
+  return React.createElement(
+    'div',
+    {},
+    React.createElement("h2", {}, "Let's get started!"),
+    React.createElement(Expenses, ( items: expenses ))
+  );
+)
+```
+
+also in the createElement approach we cannot return more than one element (that is why we only have a parent div and can nest inside them).
+
+Another syntax change is to transform component functions into arrow functions.
