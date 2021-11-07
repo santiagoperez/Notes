@@ -45,6 +45,8 @@ With forms the process is analog. We define forms regularly in HTML through ```<
 
 Input values in the forms can be tracked and set as states as well. We handle multiple separate states and the event handlres will keep track of those. Submit function just collects the states and submit them (to create new components, sending through a different page/service, etc). 
 
+### 4.2 Handling multi states
+
 We can call ```useState``` several times inside a component, and each call will be independent from each other. But we can also call useState only once and passing an object which wraps every attribute in the component that we want to register, and each handler will update the specific attribute. Using this approach we need to make sure we maintain the rest of the elements in the previous state. This is done by passing the previous state through the updater function and using spread operator to update the new attribute (we cannot do it directly because React schedules status updates and they are handled async, so we could have race conditions).
 
 There is no better way than other but usually calling state once and passing the array object keeps the code cleaner and better maintained.
@@ -124,3 +126,46 @@ const [userInput, setUserInput] = useState({
     </form>
   );
 ```
+
+### 4.3 Bottom-up communication
+
+Transferring information from parent to child is done via props.
+
+In order to communicate child to parent, what we do is to define a function in the parent that acts as an event listener, same as we do with regular forms or buttons. We can observe changes in the child and handling them in the parent.
+
+The pattern is the following.
+
+1. On the parent component and when we call the child component, we pass a new event onFunction.
+
+1. On the child, we invoke that function whenever we want to pass the data upwards
+
+1. On the parent, the onEvent function should point a handler which receives the passed data and processes it
+
+```js
+//Parent
+const processHandler = (dataReceived) => {
+  //process dataReceived
+};
+<ExpenseForm onProcessEvent={processHandler} />
+
+//Child
+const submitFunction = () => {
+  
+  //create data to be submitted
+
+  //sends data upwards
+  props.onProcessEvent(dataReceived);
+}
+```
+
+This can be combined with our previous way of passing data up-down via props so that we can bring data from a component to another one. We do not pass data from peer components but look for the closest parent component.
+
+### 4.4 Controlled components
+
+2-way binding are controlled components. That means that a value which is used in the component is passed on to a parent components through props and received from parent components.
+
+We use a component in a child which has logic residing in their parent.
+
+### 4.5 Stateful and stateless components
+
+Components also can also be stateful (they manage state) or stateless (they don't manage state). Stateless are also called presentational, static.
