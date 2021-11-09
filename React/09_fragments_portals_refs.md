@@ -101,6 +101,6 @@ This simplifies some functions where we rely on states, for example forms. Inste
 <input id="username" type="text" ref={nameInputRef} />
 ```
 
-Depending on the use case we want to use state or ref. If we never want to change a value, we can go directly with ref (otherwise we would be using a state with a keylogger). States are cleaner but more code, Refs have less code but we have edge cases where we would have to manipulate DOM.
+Depending on the use case we want to use state or ref. If we never want to change a value, we can go directly with ref (otherwise we would be using a state with a key logger). States are cleaner but more code, Refs have less code but we have edge cases where we would have to manipulate DOM.
 
 Refs make components uncontrolled because we lose the binding we got through states.
