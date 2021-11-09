@@ -43,7 +43,7 @@ React does not initialize the state always. If we subsequently perform handlers 
 
 With forms the process is analog. We define forms regularly in HTML through ```<form />```. The forms will also contain different eventHandlers which will allow modifying component and page state. EventHandlers contain an event object and with that one we can get useful information to handle in that form (e.g. what has the user input in a text field or selected in a date picker) such as ```event.target.value```.
 
-Input values in the forms can be tracked and set as states as well. We handle multiple separate states and the event handlres will keep track of those. Submit function just collects the states and submit them (to create new components, sending through a different page/service, etc). 
+Input values in the forms can be tracked and set as states as well. We handle multiple separate states and the event handlers will keep track of those. Submit function just collects the states and submit them (to create new components, sending through a different page/service, etc). 
 
 ### 4.2 Handling multi states
 
